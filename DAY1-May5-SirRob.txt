@@ -1,7 +1,7 @@
 TASK1: COLLAPSED BACKBONE: BASIC LAYER3 CONFIGURATION.
 !@@@CORE SWITCH SA TAAS
 config t
-   hostname COREtaas-62
+   hostname COREtaas-51
    enable secret pass
    service password-encryption
    no logging console
@@ -16,26 +16,26 @@ config t
       exec-timeout 0 0
    Int Vlan 1
      no shutdown
-	 ip add 10.62.1.2 255.255.255.0
+	 ip add 10.51.1.2 255.255.255.0
 	 description MGMTDATA
    Int Vlan 10
      no shutdown
-	 ip add 10.62.10.2 255.255.255.0
+	 ip add 10.51.10.2 255.255.255.0
 	 description WIRELESS
    Int Vlan 50
      no shutdown
-	 ip add 10.62.50.2 255.255.255.0
+	 ip add 10.51.50.2 255.255.255.0
 	 description IPCCTV
    Int Vlan 100
      no shutdown
-	 ip add 10.62.100.2 255.255.255.0
+	 ip add 10.51.100.2 255.255.255.0
 	 description VOICEVLAN
 end
 
 !!!DAPAT 7 UNDER62SCORE ANG NA EDIT MO  ( LINE 34 to 68 PASTE TO COREBABA SWITCH )
 !@@@LeafSwitchONLY
 config t
-   hostname COREbaba-62
+   hostname COREbaba-51
    enable secret pass
    service password-encryption
    no logging console
@@ -51,22 +51,22 @@ config t
    Int Gi 0/1
      no shutdown
 	  no switchport
-	  ip add 10.62.62.4 255.255.255.0
+	  ip add 10.51.51.4 255.255.255.0
    Int Vlan 1
      no shutdown
-	 ip add 10.62.1.4 255.255.255.0
+	 ip add 10.51.1.4 255.255.255.0
 	 description MGMTDATA
    Int Vlan 10
      no shutdown
-	 ip add 10.62.10.4 255.255.255.0
+	 ip add 10.51.10.4 255.255.255.0
 	 description WIRELESS
    Int Vlan 50
      no shutdown
-	 ip add 10.62.50.4 255.255.255.0
+	 ip add 10.51.50.4 255.255.255.0
 	 description IPCCTV
    Int Vlan 100
      no shutdown
-	 ip add 10.62.100.4 255.255.255.0
+	 ip add 10.51.100.4 255.255.255.0
 	 description VOICEVLAN
 end
 
@@ -115,31 +115,31 @@ Int Range fa0/10-12
 !!!DAPAT 21 UNDER SCORE ANG NA EDIT MO  ( LINE 72 to 99 PASTE TO COREBABA SWITCH )
 !@@@LEAF SWITCH
 config t
-ip dhcp Excluded-add 10.62.1.1 10.62.1.100
-ip dhcp Excluded-add 10.62.10.1 10.62.10.100
-ip dhcp Excluded-add 10.62.50.1 10.62.50.100
-ip dhcp Excluded-add 10.62.100.1 10.62.100.100
+ip dhcp Excluded-add 10.51.1.1 10.51.1.100
+ip dhcp Excluded-add 10.51.10.1 10.51.10.100
+ip dhcp Excluded-add 10.51.50.1 10.51.50.100
+ip dhcp Excluded-add 10.51.100.1 10.51.100.100
 ip dhcp pool MGMTDATA
-   network 10.62.1.0 255.255.255.0
-   default-router 10.62.1.4
+   network 10.51.1.0 255.255.255.0
+   default-router 10.51.1.4
    domain-name MGMTDATA.COM
-   dns-server 10.62.1.10
+   dns-server 10.51.1.10
 ip dhcp pool WIFIDATA
-   network 10.62.10.0 255.255.255.0
-   default-router 10.62.10.4
+   network 10.51.10.0 255.255.255.0
+   default-router 10.51.10.4
    domain-name WIFIDATA.COM
-   dns-server 10.62.1.10
+   dns-server 10.51.1.10
 ip dhcp pool IPCCTV
-   network 10.62.50.0 255.255.255.0
-   default-router 10.62.50.4
+   network 10.51.50.0 255.255.255.0
+   default-router 10.51.50.4
    domain-name IPCCTV.COM
-   dns-server 10.62.1.10
+   dns-server 10.51.1.10
 ip dhcp pool VOICEVLAN
-   network 10.62.100.0 255.255.255.0
-   default-router 10.62.100.4
+   network 10.51.100.0 255.255.255.0
+   default-router 10.51.100.4
    domain-name VOICEVLAN.COM
-   dns-server 10.62.1.10
-   option 150 ip 10.62.100.8   
+   dns-server 10.51.1.10
+   option 150 ip 10.51.100.8   
    END
 
 !!CREATING AND PLACING PORTS INSIDEAVLAN:
@@ -188,10 +188,10 @@ Int Fa 0/7
 config t
 ip routing
 ip dhcp pool CAMERA6
-host 10.62.50.6 255.255.255.0
+host 10.51.50.6 255.255.255.0
 client-identifier 001a.070b.472e
 ip dhcp pool CAMERA8
-host 10.62.50.8 255.255.255.0
+host 10.51.50.8 255.255.255.0
 client-identifier abcd.1234.cafb
 end
 show ip dhcp binding
@@ -202,7 +202,7 @@ CALLMANAGER EXPRESS CONFIGURATION FOR VOIP/TELEPHONY ENGINEERS
 !!cisco unified call manager Express command
 !@@@CUCM-M
 config t
-   hostname CUCM-62
+   hostname CUCM-51
    enable secret pass
    service password-encryption
    no logging console
@@ -217,7 +217,7 @@ config t
       exec-timeout 0 0
    Int Fa 0/0
      no shutdown
-	 ip add 10.62.100.8 255.255.255.0 
+	 ip add 10.51.100.8 255.255.255.0 
 	 end
    
 !!!CUCM ANALOG PHONES CONFIG
@@ -244,7 +244,7 @@ telephony-service
    no auto-reg-ephone
    max-ephones 5
    max-dn 20
-   ip source-address 10.62.100.8 port 2000
+   ip source-address 10.51.100.8 port 2000
    create cnf-files
 ephone-dn 1
   number 6211
@@ -333,10 +333,10 @@ dial-peer voice 42 Voip
  destination-pattern 42..
  session target ipv4:10.42.100.8
  codec g711ULAW
-dial-peer voice 51 Voip
- destination-pattern 51..
- session target ipv4:10.51.100.8
- codec g711ULAW
+!dial-peer voice 51 Voip
+ !destination-pattern 51..
+ !session target ipv4:10.51.100.8
+ !codec g711ULAW
 dial-peer voice 52 Voip
  destination-pattern 52..
  session target ipv4:10.52.100.8
@@ -345,10 +345,10 @@ dial-peer voice 61 Voip
  destination-pattern 61..
  session target ipv4:10.61.100.8
  codec g711ULAW
-!dial-peer voice 62 Voip
- !destination-pattern 62..
- !session target ipv4:10.62.100.8
- !codec g711ULAW
+dial-peer voice 62 Voip
+ destination-pattern 62..
+ session target ipv4:10.51.100.8
+ codec g711ULAW
 dial-peer voice 71 Voip
  destination-pattern 71..
  session target ipv4:10.71.100.8
@@ -371,7 +371,7 @@ TASK3***TASK3***TASK3***
 PRIMARY EDGE ROUTER CONFIGURATION! owned by PLDT !!!
 !@@@EDGE ROUTE CONFIG
 config t
-   hostname EDGE-62
+   hostname EDGE-51
    enable secret pass
    service password-encryption
    no logging console
@@ -386,11 +386,11 @@ config t
       exec-timeout 0 0
    Int Gi 0/0/0
      description FIBEROPTIC-TO-SWITCH
-     ip add 10.62.62.1 255.255.255.0
+     ip add 10.51.51.1 255.255.255.0
 	 no shutdown
    Int Gi 0/0/1
      description PLDT-ME-WAN
-	 ip add 200.0.0.62 255.255.255.0
+	 ip add 200.0.0.51 255.255.255.0
 	 no shutdown
    Int Loopback 0
      description VIRTUALIP-FOR-ROUTING
@@ -406,7 +406,7 @@ config t
 router ospf 1
 router-id 62.0.0.1
 network 200.0.0.0  0.0.0.255 area 0
-network 10.62.62.0  0.0.0.255 area 0
+network 10.51.51.0  0.0.0.255 area 0
 network 62.0.0.1  0.0.0.0 area 0
 Interface gi 0/0/0
  ip ospf network point-to-point
@@ -415,8 +415,8 @@ end
 @CoreBABA:
 config t
 router ospf 1
-router-id 10.62.62.4
-network 10.62.0.0  0.0.255.255 area 0
+router-id 10.51.51.4
+network 10.51.0.0  0.0.255.255 area 0
 int gi 0/1
  ip ospf network point-to-point
 end
@@ -424,8 +424,8 @@ end
 @CUCM:
 config t
 router ospf 1
-router-id 10.62.100.8
-network 10.62.100.0  0.0.0.255  area 0
+router-id 10.51.100.8
+network 10.51.100.0  0.0.0.255  area 0
 end
 
 
@@ -434,7 +434,7 @@ end
 conf t
  ip routing 
  ip route 10.11.0.0 255.255.0.0 200.0.0.11
- NO ip route 10.62.0.0 255.255.0.0 200.0.0.62
+ NO ip route 10.51.0.0 255.255.0.0 200.0.0.51
  ip route 10.21.0.0 255.255.0.0 200.0.0.21
  ip route 10.22.0.0 255.255.0.0 200.0.0.22
  ip route 10.31.0.0 255.255.0.0 200.0.0.31
@@ -450,7 +450,7 @@ conf t
  ip route 10.81.0.0 255.255.0.0 200.0.0.81
  ip route 10.82.0.0 255.255.0.0 200.0.0.82
  ip route 10.62.0.0 255.255.0.0 10.62.62.4
- NO ip route 10.62.0.0 255.255.0.0 200.0.0.62
+ NO ip route 10.51.0.0 255.255.0.0 200.0.0.51
  end
  
 *********************************************
@@ -459,20 +459,20 @@ Layer three/3 switch ROUTING = 300k up!!!
 !SI SWITCH ASA/DIKIT KAY EDGE PARA MAKALABAS
 conf t 
 ip routing
-ip route 0.0.0.0 0.0.0.0 10.62.62.1
+ip route 0.0.0.0 0.0.0.0 10.51.51.1
 end
 
 @CUCM:DEFAULT ROUTING( 0.0.0.0 0.0.0.0) FOR CUCM:
 !SI CUCM ASA/DIKIT KAY SWITCH VLAN 100 PARA MAKALABAS
 conf t
 ip routing
-ip route 0.0.0.0 0.0.0.0 10.62.100.4
+ip route 0.0.0.0 0.0.0.0 10.51.100.4
 end
 
 !How to Static Route windows Server:
 cmd
-route  add   10.0.0.0   mask   255.0.0.0    10.62.1.4
-route  add  200.0.0.0   mask  255.255.255.0   10.62.1.4
+route  add   10.0.0.0   mask   255.0.0.0    10.51.1.4
+route  add  200.0.0.0   mask  255.255.255.0   10.51.1.4
 
 ********************************************
 
@@ -483,7 +483,7 @@ config t
 dial-peer voice 69 voip
  service rivanaa out-bound
  destination-pattern 6269
- session target ipv4:10.62.100.8
+ session target ipv4:10.51.100.8
  incoming called-number 6269
  dtmf-relay h245-alphanumeric
  codec g711ulaw
@@ -588,7 +588,7 @@ DEBUG COMMANDS
 =============================================================
 
           
-http://docwiki.cisco.com/wiki/Cisco62IOS62Voice62Troubleshooting62and62Monitoring62--62Tcl62IVR62Troubleshooting
+http://docwiki.cisco.com/wiki/Cisco62IOS62Voice62Troubleshooting62and62Monitoring62--51Tcl62IVR62Troubleshooting
 
 debug voice application ?
 debug voice application error
